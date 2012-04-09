@@ -17,12 +17,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PhoneGap/PGPlugin.h>
+#import <Cordova/CDVPlugin.h>
 #import <AVFoundation/AVAudioPlayer.h>
 #import "PGLowLatencyAudioAsset.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface PGLowLatencyAudio : PGPlugin {
+@interface PGLowLatencyAudio : CDVPlugin {
     NSMutableDictionary* audioMapping; 
 }
 

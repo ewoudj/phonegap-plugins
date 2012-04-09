@@ -32,7 +32,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
 
 - (void) preloadFX:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {   
-    PluginResult* pluginResult;
+    CDVPluginResult* pluginResult;
     NSString* callbackID = [arguments pop];
     [callbackID retain];
     
@@ -64,12 +64,12 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
             AudioServicesCreateSystemSoundID((CFURLRef) pathURL, & soundID);
             [audioMapping setObject:[NSNumber numberWithInt:soundID]  forKey: audioID];
             
-            pluginResult = [PluginResult resultWithStatus:PGCommandStatus_OK messageAsString: CONTENT_LOAD_REQUESTED];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: CONTENT_LOAD_REQUESTED];
             [self writeJavascript: [pluginResult toSuccessCallbackString:callbackID]];
         }
         else
         {
-            pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: ERROR_NOT_FOUND];        
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: ERROR_NOT_FOUND];        
             [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
         }
         
@@ -78,7 +78,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
     }
     else 
     {
-        pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: ERROR_EXISTING_REFERENCE];        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR  messageAsString: ERROR_EXISTING_REFERENCE];        
         [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
     }
     
@@ -89,7 +89,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
 
 - (void) preloadAudio:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {   
-    PluginResult* pluginResult;
+    CDVPluginResult* pluginResult;
     NSString* callbackID = [arguments pop];
     [callbackID retain];
     
@@ -131,12 +131,12 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
             [asset retain];
             [audioMapping setObject:asset  forKey: audioID];
             
-            pluginResult = [PluginResult resultWithStatus:PGCommandStatus_OK messageAsString: CONTENT_LOAD_REQUESTED];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: CONTENT_LOAD_REQUESTED];
             [self writeJavascript: [pluginResult toSuccessCallbackString:callbackID]];
         }
         else
         {
-            pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: ERROR_NOT_FOUND];        
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: ERROR_NOT_FOUND];        
             [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
         }
         
@@ -145,7 +145,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
     }
     else 
     {
-        pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: ERROR_EXISTING_REFERENCE];        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: ERROR_EXISTING_REFERENCE];        
         [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
     }
     
@@ -157,7 +157,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
 
 - (void) play:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
-    PluginResult* pluginResult;
+    CDVPluginResult* pluginResult;
     NSString* callbackID = [arguments pop];
     [callbackID retain];
     
@@ -178,12 +178,12 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
             AudioServicesPlaySystemSound([_asset intValue]);
         }
         
-        pluginResult = [PluginResult resultWithStatus:PGCommandStatus_OK messageAsString: PLAY_REQUESTED];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: PLAY_REQUESTED];
         [self writeJavascript: [pluginResult toSuccessCallbackString:callbackID]];
     }
     else 
     {
-        pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: ERROR_MISSING_REFERENCE];        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: ERROR_MISSING_REFERENCE];        
         [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
     }
     
@@ -193,7 +193,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
 
 - (void) stop:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
-    PluginResult* pluginResult;
+    CDVPluginResult* pluginResult;
     NSString* callbackID = [arguments pop];
     [callbackID retain];
     
@@ -208,19 +208,19 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
             PGLowLatencyAudioAsset *_asset = (PGLowLatencyAudioAsset*) asset;
             [_asset stop];
             
-            pluginResult = [PluginResult resultWithStatus:PGCommandStatus_OK messageAsString: STOP_REQUESTED];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: STOP_REQUESTED];
             [self writeJavascript: [pluginResult toSuccessCallbackString:callbackID]];    
         }
         else if ( [asset isKindOfClass:[NSNumber class]] )
         {
-            pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: RESTRICTED];        
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: RESTRICTED];        
             [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
         }
         
     }
     else 
     {
-        pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: ERROR_MISSING_REFERENCE];        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: ERROR_MISSING_REFERENCE];        
         [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
     }
     
@@ -230,7 +230,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
 
 - (void) loop:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
-    PluginResult* pluginResult;
+    CDVPluginResult* pluginResult;
     NSString* callbackID = [arguments pop];
     [callbackID retain];
     
@@ -245,18 +245,18 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
             PGLowLatencyAudioAsset *_asset = (PGLowLatencyAudioAsset*) asset;
             [_asset loop];
             
-            pluginResult = [PluginResult resultWithStatus:PGCommandStatus_OK messageAsString: STOP_REQUESTED];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: STOP_REQUESTED];
             [self writeJavascript: [pluginResult toSuccessCallbackString:callbackID]];    
         }
         else if ( [asset isKindOfClass:[NSNumber class]] )
         {
-            pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: RESTRICTED];        
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: RESTRICTED];        
             [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
         }
     }
     else 
     {
-        pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: ERROR_MISSING_REFERENCE];        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: ERROR_MISSING_REFERENCE];        
         [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
     }
     
@@ -266,7 +266,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
 
 - (void) unload:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
 {
-    PluginResult* pluginResult;
+    CDVPluginResult* pluginResult;
     NSString* callbackID = [arguments pop];
     [callbackID retain];
     
@@ -288,12 +288,12 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         }
         
         [audioMapping removeObjectForKey: audioID];
-        pluginResult = [PluginResult resultWithStatus:PGCommandStatus_OK messageAsString: UNLOAD_REQUESTED];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: UNLOAD_REQUESTED];
         [self writeJavascript: [pluginResult toSuccessCallbackString:callbackID]];
     }
     else 
     {
-        pluginResult = [PluginResult resultWithStatus:PGCommandStatus_ERROR messageAsString: ERROR_MISSING_REFERENCE];        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: ERROR_MISSING_REFERENCE];        
         [self writeJavascript: [pluginResult toErrorCallbackString:callbackID]];
     }
     
